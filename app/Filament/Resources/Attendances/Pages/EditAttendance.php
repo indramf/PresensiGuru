@@ -3,19 +3,24 @@
 namespace App\Filament\Resources\Attendances\Pages;
 
 use App\Filament\Resources\Attendances\AttendanceResource;
-use Filament\Actions\DeleteAction;
-use Filament\Actions\ViewAction;
+use App\Support\AttendanceRules;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Database\Eloquent\Model;
 
 class EditAttendance extends EditRecord
 {
     protected static string $resource = AttendanceResource::class;
 
-    protected function getHeaderActions(): array
+    /**
+     * Perubahan status lewat AttendanceRules agar alasan wajib dan tercatat di audit log (FR-11).
+     */
+    protected function handleRecordUpdate(Model $record, array $data): Model
     {
-        return [
-            ViewAction::make(),
-            DeleteAction::make(),
-        ];
+        return AttendanceRules::changeStatus(
+            auth()->user(),
+            $record,
+            $data['status'],
+            $data['reason'] ?? null,
+        );
     }
 }

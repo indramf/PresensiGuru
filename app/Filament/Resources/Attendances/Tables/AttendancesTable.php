@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Attendances\Tables;
 
 use App\Filament\Resources\Attendances\AttendanceResource;
 use App\Models\Attendance;
+use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -31,8 +32,8 @@ class AttendancesTable
                 TextColumn::make('status')
                     ->label('Status')
                     ->badge()
-                    ->formatStateUsing(fn (string $state): string => AttendanceResource::statusLabels()[$state] ?? $state)
-                    ->color(fn (string $state): string => match ($state) {
+                    ->formatStateUsing(fn(string $state): string => AttendanceResource::statusLabels()[$state] ?? $state)
+                    ->color(fn(string $state): string => match ($state) {
                         Attendance::STATUS_HADIR => 'success',
                         Attendance::STATUS_TERLAMBAT => 'warning',
                         default => 'info',
@@ -46,6 +47,9 @@ class AttendancesTable
                     ->label('Status')
                     ->options(AttendanceResource::statusLabels()),
             ])
-            ->defaultSort('recorded_at', 'desc');
+            ->defaultSort('recorded_at', 'desc')
+            ->recordActions([
+                EditAction::make()->label('Ubah status'),
+            ]);
     }
 }

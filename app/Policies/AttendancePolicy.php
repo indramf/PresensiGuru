@@ -43,7 +43,7 @@ class AttendancePolicy
      */
     public function update(User $user, Model $record): bool
     {
-        return false;
+        return $user->hasRole(User::ROLE_ADMIN, User::ROLE_GURU_PIKET);
     }
 
     /**

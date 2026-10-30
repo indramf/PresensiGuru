@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\Attendances;
 
 use App\Filament\Resources\Attendances\Pages\CreateAttendance;
-// use App\Filament\Resources\Attendances\Pages\EditAttendance;
+use App\Filament\Resources\Attendances\Pages\EditAttendance;
 use App\Filament\Resources\Attendances\Pages\ListAttendances;
 // use App\Filament\Resources\Attendances\Pages\ViewAttendance;
 use App\Filament\Resources\Attendances\Schemas\AttendanceForm;
@@ -94,7 +94,7 @@ class AttendanceResource extends Resource
             'index' => ListAttendances::route('/'),
             'create' => CreateAttendance::route('/create'),
             // 'view' => ViewAttendance::route('/{record}'),
-            // 'edit' => EditAttendance::route('/{record}/edit'),
+            'edit' => EditAttendance::route('/{record}/edit'),
         ];
     }
 }
