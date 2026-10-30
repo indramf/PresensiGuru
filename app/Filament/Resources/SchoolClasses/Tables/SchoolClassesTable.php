@@ -15,18 +15,14 @@ class SchoolClassesTable
         return $table
             ->columns([
                 TextColumn::make('class_name')
-                    ->searchable(),
+                    ->label('Kelas')
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('academic_year')
-                    ->searchable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->label('Tahun ajaran')
+                    ->sortable(),
             ])
+            ->defaultSort('class_name')
             ->filters([
                 //
             ])

@@ -15,16 +15,11 @@ class SubjectsTable
         return $table
             ->columns([
                 TextColumn::make('subject_name')
-                    ->searchable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->label('Mata pelajaran')
+                    ->searchable()
+                    ->sortable(),
             ])
+            ->defaultSort('subject_name')
             ->filters([
                 //
             ])

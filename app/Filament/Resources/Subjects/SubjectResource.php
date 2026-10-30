@@ -11,16 +11,36 @@ use App\Models\Subject;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
+// use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class SubjectResource extends Resource
 {
     protected static ?string $model = Subject::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?string $slug = 'subjects';
+
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-book-open';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Data Master';
+
+    protected static ?int $navigationSort = 3;
+
+    protected static ?string $navigationLabel = 'Mata Pelajaran';
+
+    protected static ?string $modelLabel = 'mata pelajaran';
+
+    protected static ?string $pluralModelLabel = 'mata pelajaran';
 
     protected static ?string $recordTitleAttribute = 'subject_name';
+
+
+    // protected static ?string $model = Subject::class;
+
+    // protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+    // protected static ?string $recordTitleAttribute = 'subject_name';
 
     public static function form(Schema $schema): Schema
     {

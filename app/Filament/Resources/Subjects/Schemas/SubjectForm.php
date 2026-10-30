@@ -9,10 +9,12 @@ class SubjectForm
 {
     public static function configure(Schema $schema): Schema
     {
-        return $schema
-            ->components([
-                TextInput::make('subject_name')
-                    ->required(),
-            ]);
+        return $schema->components([
+            TextInput::make('subject_name')
+                ->label('Nama mata pelajaran')
+                ->required()
+                ->maxLength(80)
+                ->unique(ignoreRecord: true),
+        ]);
     }
 }
