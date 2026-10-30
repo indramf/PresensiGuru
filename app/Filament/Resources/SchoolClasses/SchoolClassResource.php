@@ -11,16 +11,36 @@ use App\Models\SchoolClass;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
+// use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class SchoolClassResource extends Resource
 {
     protected static ?string $model = SchoolClass::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?string $slug = 'school-classes';
+
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-building-library';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Data Master';
+
+    protected static ?int $navigationSort = 2;
+
+    protected static ?string $navigationLabel = 'Kelas';
+
+    protected static ?string $modelLabel = 'kelas';
+
+    protected static ?string $pluralModelLabel = 'kelas';
 
     protected static ?string $recordTitleAttribute = 'class_name';
+
+
+    // protected static ?string $model = SchoolClass::class;
+
+    // protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+    // protected static ?string $recordTitleAttribute = 'class_name';
 
     public static function form(Schema $schema): Schema
     {

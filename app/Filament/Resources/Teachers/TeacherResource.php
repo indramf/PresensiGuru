@@ -11,16 +11,36 @@ use App\Models\Teacher;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
+// use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class TeacherResource extends Resource
 {
     protected static ?string $model = Teacher::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?string $slug = 'teachers';
+
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-academic-cap';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Data Master';
+
+    protected static ?int $navigationSort = 1;
+
+    protected static ?string $navigationLabel = 'Guru';
+
+    protected static ?string $modelLabel = 'guru';
+
+    protected static ?string $pluralModelLabel = 'guru';
 
     protected static ?string $recordTitleAttribute = 'full_name';
+
+
+    // protected static ?string $model = Teacher::class;
+
+    // protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+    // protected static ?string $recordTitleAttribute = 'full_name';
 
     public static function form(Schema $schema): Schema
     {
