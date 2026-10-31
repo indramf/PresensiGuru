@@ -6,6 +6,7 @@ use App\Models\Attendance;
 use App\Models\ClassReport;
 use App\Models\Schedule;
 use App\Models\SchoolClass;
+use App\Models\SecurityAlert;
 use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\User;
@@ -28,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         foreach ([User::class, Teacher::class, SchoolClass::class, Subject::class, Schedule::class, Attendance::class, ClassReport::class] as $model) {
-            $model::observe(AuditObserver::class);
+            $model::observe(AuditObserver::class, SecurityAlert::class);
         }
     }
 }

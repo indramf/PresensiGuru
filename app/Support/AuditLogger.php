@@ -34,7 +34,7 @@ class AuditLogger
         $after = self::sanitize($after);
         $occurredAt = now();
 
-        return DB::transaction(function () use ($event, $result, $actorId, $targetType, $targetId, $before, $after, $reason, $occurredAt): AuditLog {
+        $log =  DB::transaction(function () use ($event, $result, $actorId, $targetType, $targetId, $before, $after, $reason, $occurredAt): AuditLog {
             // Penguncian baris terakhir agar rantai tetap berurutan saat ada pencatatan bersamaan.
             $last = AuditLog::query()->orderByDesc('id')->lockForUpdate()->first();
             $previousHash = $last?->entry_hash ?? self::genesis();
@@ -68,6 +68,14 @@ class AuditLogger
 
             return $log;
         });
+        try {
+            AnomalyDetector::evaluate($log);
+        } catch (\Throwable $e) {
+            // Kegagalan deteksi tidak boleh menggagalkan pencatatan atau operasi utama.
+            report($e);
+        }
+
+        return $log;
     }
 
     public static function hashFor(
